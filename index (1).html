@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resource Allocation Simulator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Resource Allocation Simulator</h1>
+  <p>Banker's Algorithm &nbsp;·&nbsp; Resource Allocation Graph &nbsp;·&nbsp; Deadlock Detection &nbsp;|&nbsp; OS SLA – Stage 2</p>
+</header>
+
+<main>
+<!-- 1. Input -->
+<section class="card">
+  <h2><span class="num">1</span> System input</h2>
+  <div class="row">
+    <label>Processes (n) <input id="n" type="number" min="1" max="10" value="5"></label>
+    <label>Resource types (m) <input id="m" type="number" min="1" max="6" value="3"></label>
+    <button id="btnBuild">Create tables</button>
+    <span class="sep"></span>
+    <span class="hint">Load example:</span>
+    <button id="btnS1" class="alt">Banker's (5 jobs)</button>
+    <button id="btnS2" class="alt">Deadlock (detection)</button>
+    <button id="btnS3" class="alt">Deadlock (graph)</button>
+  </div>
+  <p class="hint">Typing your own data? Fill in <b>Total resources</b> first, then <b>Maximum</b>, then <b>Allocation</b> (Request only for detection / graph).</p>
+  <div id="totals" class="row"></div>
+  <div id="matrices"></div>
+  <div id="available" class="avail"></div>
+  <div class="row reqbox">
+    <b>Resource request (Banker's only):</b>
+    <label>Process <select id="reqProc"></select></label>
+    <label>Request <input id="reqVec" type="text" placeholder="e.g. 1,0,2"></label>
+    <span class="hint">Leave empty to just check whether the current state is safe.</span>
+  </div>
+  <div id="error" role="alert"></div>
+</section>
+
+<!-- 2. Algorithm + controls -->
+<section class="card">
+  <h2><span class="num">2</span> Algorithm &amp; controls</h2>
+  <div class="row">
+    <label class="radio"><input type="radio" name="algo" value="banker" checked> Banker's algorithm</label>
+    <label class="radio"><input type="radio" name="algo" value="rag"> Resource Allocation Graph</label>
+    <label class="radio"><input type="radio" name="algo" value="detect"> Deadlock detection</label>
+  </div>
+  <div class="row">
+    <button id="btnRun">▶ Run simulation</button>
+    <button id="btnPrev" class="alt">◀ Prev step</button>
+    <button id="btnNext" class="alt">Next step ▶</button>
+    <button id="btnPlay" class="alt">Auto-play</button>
+    <button id="btnReset" class="ghost">Reset</button>
+  </div>
+</section>
+
+<!-- 3. Result -->
+<section class="card">
+  <h2><span class="num">3</span> Execution &amp; result</h2>
+  <div id="statusBar" class="empty">Choose an algorithm and press <b>Run simulation</b>, or step through it.</div>
+  <div id="summary"></div>
+  <div class="split">
+    <div id="stateView"></div>
+    <ol id="stepLog"></ol>
+  </div>
+</section>
+
+<!-- 4. Performance -->
+<section class="card">
+  <h2><span class="num">4</span> Performance</h2>
+  <div id="perf" class="empty">Run an algorithm to see its performance figures.</div>
+  <div class="row top">
+    <button id="btnCompare">Compare all three on this data</button>
+    <span class="sep"></span>
+    <label>Benchmark with random system of
+      <select id="benchN"><option>10</option><option>50</option><option selected>100</option><option>300</option><option>600</option></select> processes</label>
+    <button id="btnBench" class="alt">Run benchmark</button>
+  </div>
+  <div id="compareOut"></div>
+</section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
